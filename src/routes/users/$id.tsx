@@ -34,7 +34,7 @@ export const Route = createFileRoute("/users/$id")({
     const [value, setValue] = useState<string>("details");
 
     return (
-      <div className="flex flex-col">
+      <div className="flex flex-col min-h-0">
         <div className="w-full">
           <div className="flex justify-end items-center gap-2">
             <Spinner
@@ -48,9 +48,9 @@ export const Route = createFileRoute("/users/$id")({
         <Tabs
           value={value}
           onValueChange={(value) => setValue(value)}
-          className="h-full flex flex-col"
+          className="h-full flex flex-col min-h-0 flex-1"
         >
-          <TabsList>
+          <TabsList className="shrink-0">
             <TabsTrigger value="details">Details</TabsTrigger>
             <TabsTrigger value="posts">Posts</TabsTrigger>
           </TabsList>

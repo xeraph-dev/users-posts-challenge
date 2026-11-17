@@ -11,7 +11,7 @@ export const Route = createFileRoute("/users")({
           <UsersList />
         </aside>
         <Separator orientation="vertical" />
-        <main className="flex-1 min-w-0 p-4 h-full">
+        <main className="flex-1 min-w-0 p-4 h-full flex flex-col">
           <Outlet />
         </main>
       </div>
