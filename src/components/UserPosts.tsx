@@ -31,8 +31,8 @@ export const UserPosts = memo(function UserPosts({ id }: UserPostsProps) {
     return (
       <ItemGroup>
         {[1, 2, 3].map((it) => (
-          <Skeleton>
-            <Item key={it} variant="outline" className="invisible">
+          <Skeleton key={it}>
+            <Item variant="outline" className="invisible">
               <ItemContent>
                 <ItemTitle>{it}</ItemTitle>
                 <ItemDescription>{it}</ItemDescription>

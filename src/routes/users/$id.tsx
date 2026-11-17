@@ -1,3 +1,4 @@
+import { CreatePost } from "@/components/CreatePost";
 import { Button } from "@/components/ui/button";
 import {
   Empty,
@@ -35,15 +36,13 @@ export const Route = createFileRoute("/users/$id")({
     return (
       <div className="flex flex-col">
         <div className="w-full">
-          <div className="flex justify-end items-center gap-2 mb-[-100%]">
+          <div className="flex justify-end items-center gap-2">
             <Spinner
               className={cn("invisible", {
                 visible: detailsIsFetching || postsIsFetching,
               })}
             />
-            <Button variant="outline" hidden={value !== "posts"}>
-              Create new post
-            </Button>
+            <CreatePost hidden={value !== "posts"} userId={id} />
           </div>
         </div>
         <Tabs

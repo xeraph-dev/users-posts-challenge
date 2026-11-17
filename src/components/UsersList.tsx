@@ -23,8 +23,8 @@ export const UsersList = memo(function UsersList() {
       <div className="flex flex-col h-full overflow-hidden gap-4">
         <ItemGroup>
           {[1, 2, 3].map((it) => (
-            <Skeleton>
-              <Item key={it} variant="outline" className="invisible">
+            <Skeleton key={it}>
+              <Item variant="outline" className="invisible">
                 <ItemContent>
                   <ItemTitle>{it}</ItemTitle>
                 </ItemContent>
