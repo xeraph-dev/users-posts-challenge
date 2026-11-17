@@ -1,75 +1,48 @@
-# React + TypeScript + Vite
+# Users and Posts Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web para la gestión de usuarios y publicaciones.
 
-Currently, two official plugins are available:
+## 🚀 Cómo ejecutarlo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. **Clonar el repositorio:**
+   ```bash
+   git clone [https://github.com/xeraphdev/users-posts-challenge](https://github.com/xeraphdev/users-posts-challenge)
+   cd users-posts-challenge
+   ```
 
-## React Compiler
+2. **Instalar dependencias (usando pnpm):**
+   ```bash
+   pnpm install
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+3. **Ejecutar en desarrollo:**
+   ```bash
+   pnpm dev
+   ```
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Decisiones técnicas
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* **UI (`shadcn/ui`):** Se eligió porque construir los componentes desde cero habría tomado mucho más tiempo.
+* **TanStack Suite:** Seleccionada por su gran integración con `shadcn/ui`.
+  * **TanStack Query:** Para facilitar la gestión de estados asíncronos (`isLoading`, `isFetching`, etc.).
+  * **TanStack Router:** Por su interesante enfoque de enrutamiento basado en archivos.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## ⏳ ¿Qué haría con más tiempo?
 
-```
+* **Mejor arquitectura:** Reestructurar el proyecto para mejorar la escalabilidad y facilitar el testing (por ejemplo, aislar las llamadas a la API en servicios dedicados y usar `axios` en lugar de `fetch`).
+* **Testing:** Completar las pruebas unitarias y de integración para componentes clave como `CreatePost`.
+* **CRUD completo:** Implementar la creación, edición y eliminación tanto de usuarios como de posts (actualmente solo se permite crearlos).
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🤖 Uso de la IA
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+La Inteligencia Artificial se utilizó de forma complementaria durante el desarrollo para:
+* **Creación de este documento**: Este mismo documento fue redactado con la IA, proporcionándole toda la información detallada sobre qué debía contener.
+* **Búsqueda de documentación:** Encontrar ejemplos y referencias de la suite de TanStack de forma ágil, ya que no siempre están explícitos en su documentación oficial.
+* **Configuración de tests:** Acelerar el setup inicial del entorno de pruebas.
+* **Depuración:** Identificar el origen de errores con mensajes poco claros.
