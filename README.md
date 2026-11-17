@@ -33,6 +33,7 @@ Aplicación web para la gestión de usuarios y publicaciones.
 
 ## ⏳ ¿Qué haría con más tiempo?
 
+* **Diseño responsive:** Adaptar la interfaz para garantizar una correcta visualización y experiencia de usuario en dispositivos móviles y tablets.
 * **Mejor arquitectura:** Reestructurar el proyecto para mejorar la escalabilidad y facilitar el testing (por ejemplo, aislar las llamadas a la API en servicios dedicados y usar `axios` en lugar de `fetch`).
 * **Testing:** Completar las pruebas unitarias y de integración para componentes clave como `CreatePost`.
 * **CRUD completo:** Implementar la creación, edición y eliminación tanto de usuarios como de posts (actualmente solo se permite crearlos).
