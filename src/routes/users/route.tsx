@@ -6,8 +6,8 @@ import { memo } from "react";
 export const Route = createFileRoute("/users")({
   component: memo(function UsersLayout() {
     return (
-      <div className="flex flex-1">
-        <aside className="w-72 shrink-0 p-4">
+      <div className="flex flex-1 overflow-hidden">
+        <aside className="w-72 shrink-0 p-4 h-full">
           <UsersList />
         </aside>
         <Separator orientation="vertical" />
