@@ -6,6 +6,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
+import { UserDetails } from "@/components/UserDetails";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { zodValidator } from "@tanstack/zod-adapter";
 import { User } from "lucide-react";
@@ -20,7 +21,8 @@ export const Route = createFileRoute("/users/$id")({
   ),
   component: memo(function UserPage() {
     const { id } = Route.useParams();
-    return <div>User ID: {id}</div>;
+
+    return <UserDetails id={id} />;
   }),
   errorComponent: memo(function UserErrorPage() {
     return (
