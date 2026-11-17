@@ -29,7 +29,7 @@ export const UserPosts = memo(function UserPosts({ id }: UserPostsProps) {
 
   if (isLoading) {
     return (
-      <ItemGroup>
+      <ItemGroup data-testid="user-posts-loading">
         {[1, 2, 3].map((it) => (
           <Skeleton key={it}>
             <Item variant="outline" className="invisible">
@@ -52,9 +52,9 @@ export const UserPosts = memo(function UserPosts({ id }: UserPostsProps) {
     );
   }
 
-  if (!data) {
+  if (!data || !data.length) {
     return (
-      <Empty className="border border-dashed">
+      <Empty data-testid="user-posts-empty" className="border border-dashed">
         <EmptyHeader>
           <EmptyMedia variant="icon">
             <Newspaper className="text-muted-foreground" />
@@ -70,12 +70,16 @@ export const UserPosts = memo(function UserPosts({ id }: UserPostsProps) {
 
   return (
     <ScrollArea className="h-full">
-      <ItemGroup>
+      <ItemGroup data-testid="user-posts">
         {data.map((post) => (
           <Item key={post.id} variant="outline">
-            <ItemContent>
-              <ItemTitle>{post.title}</ItemTitle>
-              <ItemDescription>{post.body}</ItemDescription>
+            <ItemContent data-testid={`user-posts-${post.id}`}>
+              <ItemTitle data-testid={`user-posts-${post.id}-title`}>
+                {post.title}
+              </ItemTitle>
+              <ItemDescription data-testid={`user-posts-${post.id}-body`}>
+                {post.body}
+              </ItemDescription>
             </ItemContent>
           </Item>
         ))}

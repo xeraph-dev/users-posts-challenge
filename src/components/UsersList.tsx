@@ -20,7 +20,10 @@ export const UsersList = memo(function UsersList() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col h-full overflow-hidden gap-4">
+      <div
+        data-testid="users-list-loading"
+        className="flex flex-col h-full overflow-hidden gap-4"
+      >
         <ItemGroup>
           {[1, 2, 3].map((it) => (
             <Skeleton key={it}>
@@ -36,9 +39,9 @@ export const UsersList = memo(function UsersList() {
     );
   }
 
-  if (!data) {
+  if (!data || !data.length) {
     return (
-      <Empty className="border border-dashed">
+      <Empty data-testid="users-list-empty" className="border border-dashed">
         <EmptyHeader>
           <EmptyMedia variant="icon">
             <UserPlus className="text-muted-foreground" />
@@ -58,7 +61,10 @@ export const UsersList = memo(function UsersList() {
   }
 
   return (
-    <div className="flex flex-col h-full overflow-hidden gap-4">
+    <div
+      data-testid="users-list"
+      className="flex flex-col h-full overflow-hidden gap-4"
+    >
       <ScrollArea className="h-full min-h-0 flex-1">
         <ItemGroup>
           {data.map((user) => (
@@ -66,9 +72,12 @@ export const UsersList = memo(function UsersList() {
               key={user.id}
               variant="outline"
               render={
-                <Link to="/users/$id" params={{ id: user.id }}>
-                  <ItemContent>
-                    <ItemTitle>{user.name}</ItemTitle>
+                <Link  to="/users/$id" params={{ id: user.id }}>
+                  <ItemContent
+                    data-testid={`users-list-${user.id}`}>
+                    <ItemTitle data-testid={`users-list-${user.id}-name`}>
+                      {user.name}
+                    </ItemTitle>
                   </ItemContent>
                 </Link>
               }
