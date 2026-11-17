@@ -6,11 +6,14 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
+import { Spinner } from "@/components/ui/spinner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UserDetails } from "@/components/UserDetails";
 import { UserPosts } from "@/components/UserPosts";
+import { useIsFetching } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { zodValidator } from "@tanstack/zod-adapter";
+import { cn } from "cn";
 import { User } from "lucide-react";
 import { memo, useState } from "react";
 import { z } from "zod";
@@ -24,12 +27,24 @@ export const Route = createFileRoute("/users/$id")({
   component: memo(function UserPage() {
     const { id } = Route.useParams();
 
+    const detailsIsFetching = useIsFetching({ queryKey: ["users", id] });
+    const postsIsFetching = useIsFetching({ queryKey: ["users", id, "posts"] });
+
     const [value, setValue] = useState<string>("details");
 
     return (
       <div className="flex flex-col">
-        <div className="w-full flex justify-end" hidden={value !== "posts"}>
-          <Button variant="outline" className="mb-[-100%]">Create new post</Button>
+        <div className="w-full">
+          <div className="flex justify-end items-center gap-2 mb-[-100%]">
+            <Spinner
+              className={cn("invisible", {
+                visible: detailsIsFetching || postsIsFetching,
+              })}
+            />
+            <Button variant="outline" hidden={value !== "posts"}>
+              Create new post
+            </Button>
+          </div>
         </div>
         <Tabs
           value={value}
@@ -61,7 +76,7 @@ export const Route = createFileRoute("/users/$id")({
       <Empty className="border border-dashed">
         <EmptyHeader>
           <EmptyMedia variant="icon">
-            <User />
+            <User className="text-muted-foreground" />
           </EmptyMedia>
           <EmptyTitle>Routing error</EmptyTitle>
           <EmptyContent>

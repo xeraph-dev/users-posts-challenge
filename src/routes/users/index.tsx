@@ -17,7 +17,7 @@ export const Route = createFileRoute("/users/")({
       <Empty className="border border-dashed">
         <EmptyHeader>
           <EmptyMedia variant="icon">
-            <User />
+            <User className="text-muted-foreground" />
           </EmptyMedia>
           <EmptyTitle>No user selected</EmptyTitle>
           <EmptyDescription>

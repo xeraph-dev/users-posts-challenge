@@ -4,19 +4,73 @@ import { useGetUser } from "@/hooks/useGetUser";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "./ui/separator";
 import { ScrollArea } from "./ui/scroll-area";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "./ui/empty";
+import { UserX } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { Button } from "./ui/button";
 
 export type UserDetailsProps = {
   id: number;
 };
 
 export const UserDetails = memo(function UserDetails({ id }: UserDetailsProps) {
-  const { data } = useGetUser(id);
+  const { data, isLoading } = useGetUser(id);
+
+  if (isLoading) {
+    return (
+      <Skeleton>
+        <Card className="invisible">
+          <CardHeader className="flex gap-4 items-center">
+            <span className="text-xl">name</span>
+            <span>@</span>
+          </CardHeader>
+          <Separator />
+          <CardContent className="flex flex-col gap-4">
+            <section className="flex flex-col gap-2">
+              <h3 className="text-lg">Contact Information</h3>
+              <Separator />
+              <div className="grid grid-cols-[auto_1fr_auto_1fr] gap-2">
+                <span>Email:</span>
+                <span>@</span>
+                <span>Phone:</span>
+                <span>@</span>
+                <span>Website:</span>
+                <span>@</span>
+              </div>
+            </section>
+          </CardContent>
+        </Card>
+      </Skeleton>
+    );
+  }
 
   if (!data) {
     return (
-      <div className="flex flex-col gap-4">
-        <Skeleton className="w-full h-full" />
-      </div>
+      <Empty className="border border-dashed">
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <UserX className="text-muted-foreground" />
+          </EmptyMedia>
+          <EmptyTitle>User not found</EmptyTitle>
+          <EmptyDescription>
+            The user you are looking for does not exist or has been deleted.
+          </EmptyDescription>
+        </EmptyHeader>
+        <EmptyContent>
+          <Link to="/users">
+            <Button variant="outline" size="sm">
+              Back to users list
+            </Button>
+          </Link>
+        </EmptyContent>
+      </Empty>
     );
   }
 
